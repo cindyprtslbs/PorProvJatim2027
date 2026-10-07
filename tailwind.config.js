@@ -61,6 +61,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
+        display: ['var(--font-oswald)', 'sans-serif'],
       },
       animation: {
         'fade-up': 'fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',

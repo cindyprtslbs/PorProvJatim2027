@@ -154,7 +154,7 @@ export default function NewsSection({ variant = 'preview' }: NewsSectionProps) {
             </div>
             <div ref={newsCarouselRef} className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {carouselItems.map((article) => (
-                <div key={article.id} className="w-[min(620px,calc(100vw-2rem))] shrink-0 snap-start">
+                <div key={article.id} className="w-[360px] shrink-0 snap-start">
                   {renderNewsCard(article, false)}
                 </div>
               ))}
