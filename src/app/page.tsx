@@ -234,15 +234,224 @@ export default function HomePage() {
             {/* SCHEDULE LAYOUT */}
             <div className="p-4 lg:p-8 bg-white">
               {/* Match Date Header */}
-              <div className="mb-8 flex items-center gap-4">
+              <div className="mb-8 flex items-center justify-between">
                 <div className="border-l-4 border-cyan-400 pl-4">
                   <h4 className="font-display font-bold text-3xl text-[#0A1128] uppercase tracking-tight leading-none">08 Oktober 2027</h4>
                   <p className="text-slate-500 font-medium text-sm mt-1">⚽ Sepak Bola · 4 Pertandingan</p>
                 </div>
+                <span className="hidden md:flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                  <span className="w-2 h-2 rounded-full bg-red-sport animate-pulse"></span> 1 SEDANG BERLANGSUNG
+                </span>
               </div>
 
               {/* Match Cards — 2-Column Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {[
+                  {
+                    sport: 'SEPAK BOLA',
+                    round: 'Babak Penyisihan Grup A',
+                    kategori: 'Putra',
+                    date: '08 OKTOBER 2027',
+                    time: '15:00',
+                    status: 'live',
+                    home: { short: 'SBY', full: 'SURABAYA', admin: 'Kota Surabaya', color: '#0A1128', players: ['Ahmad Fauzan', 'Rizky Pratama', 'Dimas Saputra'] },
+                    away: { short: 'MLG', full: 'MALANG', admin: 'Kab. Malang', color: '#7B0000', players: ['Fajar Ramadhan', 'Bagas Putra', 'Reza Maulana'] },
+                    venue: 'Stadion Gelora Bung Tomo',
+                    city: 'Surabaya',
+                    extraPlayers: 14,
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    round: 'Babak Penyisihan Grup B',
+                    kategori: 'Putra',
+                    date: '08 OKTOBER 2027',
+                    time: '19:00',
+                    status: 'upcoming',
+                    home: { short: 'KDR', full: 'KEDIRI', admin: 'Kota Kediri', color: '#1A3A5C', players: ['Andi Prasetyo', 'Budi Santoso', 'Cahyo Wibowo'] },
+                    away: { short: 'BTU', full: 'BATU', admin: 'Kota Batu', color: '#2D5A1B', players: ['Dani Kurniawan', 'Eko Setiawan', 'Fandi Ahmad'] },
+                    venue: 'Stadion Gelora Delta',
+                    city: 'Sidoarjo',
+                    extraPlayers: 14,
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    round: 'Babak Penyisihan Grup A',
+                    kategori: 'Putri',
+                    date: '08 OKTOBER 2027',
+                    time: '10:00',
+                    status: 'finished',
+                    home: { short: 'GRS', full: 'GRESIK', admin: 'Kab. Gresik', color: '#4A1F00', players: ['Siti Rahayu', 'Dewi Kartika', 'Nurul Hidayah'] },
+                    away: { short: 'SDR', full: 'SIDOARJO', admin: 'Kab. Sidoarjo', color: '#003366', players: ['Intan Permata', 'Lestari Wulan', 'Maya Sari'] },
+                    venue: 'Stadion Gelora Bung Tomo',
+                    city: 'Surabaya',
+                    extraPlayers: 14,
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    round: 'Babak Penyisihan Grup C',
+                    kategori: 'Putra',
+                    date: '08 OKTOBER 2027',
+                    time: '13:00',
+                    status: 'upcoming',
+                    home: { short: 'MDN', full: 'MADIUN', admin: 'Kota Madiun', color: '#5C1A1A', players: ['Gunawan Putra', 'Hendra Wijaya', 'Irwan Setiadi'] },
+                    away: { short: 'MJK', full: 'MOJOKERTO', admin: 'Kota Mojokerto', color: '#1A4A2E', players: ['Joko Susilo', 'Kukuh Prasetya', 'Lukman Hakim'] },
+                    venue: 'Stadion Brantas',
+                    city: 'Kediri',
+                    extraPlayers: 14,
+                  },
+                ].map((match, i) => (
+                  <div
+                    key={i}
+                    className="group bg-white border border-slate-200 hover:border-slate-400 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-200 flex flex-col relative overflow-hidden"
+                  >
+                    {/* STATUS BAR — top accent */}
+                    <div className={`h-1 w-full shrink-0 ${match.status === 'live' ? 'bg-red-sport' : match.status === 'finished' ? 'bg-slate-300' : 'bg-cyan-400'}`}></div>
+
+                    {/* ── TOP PANEL: Cabor + Round + Status ── */}
+                    <div className="flex items-center justify-between px-5 py-3 bg-[#0A1128]">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-display font-bold text-sm tracking-wider uppercase">{match.sport}</span>
+                        <span className="text-slate-500 text-[10px]">·</span>
+                        <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{match.round}</span>
+                        <span className="text-slate-500 text-[10px]">·</span>
+                        <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-widest">{match.kategori}</span>
+                      </div>
+                      {match.status === 'live' && (
+                        <span className="flex items-center gap-1.5 bg-red-sport text-white text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> LIVE
+                        </span>
+                      )}
+                      {match.status === 'upcoming' && (
+                        <span className="text-cyan-300 text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest border border-cyan-700">
+                          UPCOMING
+                        </span>
+                      )}
+                      {match.status === 'finished' && (
+                        <span className="text-slate-500 text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest border border-slate-700">
+                          SELESAI
+                        </span>
+                      )}
+                    </div>
+
+                    {/* ── MAIN FIXTURE AREA ── */}
+                    <div className="flex items-stretch bg-white relative">
+                      {/* Home Team */}
+                      <div className="flex-1 flex flex-col items-center justify-center py-6 px-4 gap-3">
+                        {/* Logo Block */}
+                        <div
+                          className="w-20 h-20 flex items-center justify-center border border-slate-100 group-hover:scale-105 transition-transform duration-200 shadow-inner relative overflow-hidden"
+                          style={{ backgroundColor: match.home.color }}
+                        >
+                          {/* Diagonal shine effect */}
+                          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(135deg, white 0%, transparent 50%)' }}></div>
+                          <span className="font-display font-black text-white text-xl tracking-tighter relative z-10">{match.home.short}</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-display font-bold text-2xl text-[#0A1128] uppercase tracking-tight leading-none">{match.home.full}</div>
+                          <div className="text-slate-400 text-[10px] font-semibold mt-1 uppercase tracking-wider">{match.home.admin}</div>
+                        </div>
+                      </div>
+
+                      {/* VS Center Column */}
+                      <div className="flex flex-col items-center justify-center shrink-0 px-2 py-6 gap-1 relative">
+                        {/* Decorative vertical line above */}
+                        <div className="w-px flex-1 bg-slate-100"></div>
+                        <div className="bg-slate-50 border border-slate-200 px-3 py-2 my-1">
+                          <span className="font-display font-bold text-slate-300 text-lg tracking-widest leading-none">VS</span>
+                        </div>
+                        {/* Decorative vertical line below */}
+                        <div className="w-px flex-1 bg-slate-100"></div>
+                      </div>
+
+                      {/* Away Team */}
+                      <div className="flex-1 flex flex-col items-center justify-center py-6 px-4 gap-3">
+                        <div
+                          className="w-20 h-20 flex items-center justify-center border border-slate-100 group-hover:scale-105 transition-transform duration-200 shadow-inner relative overflow-hidden"
+                          style={{ backgroundColor: match.away.color }}
+                        >
+                          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(135deg, white 0%, transparent 50%)' }}></div>
+                          <span className="font-display font-black text-white text-xl tracking-tighter relative z-10">{match.away.short}</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-display font-bold text-2xl text-[#0A1128] uppercase tracking-tight leading-none">{match.away.full}</div>
+                          <div className="text-slate-400 text-[10px] font-semibold mt-1 uppercase tracking-wider">{match.away.admin}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ── DATE & TIME BAND ── */}
+                    <div className="flex items-center justify-center gap-4 bg-slate-50 border-y border-slate-100 py-3 px-5">
+                      <div className="flex items-center gap-1.5 text-slate-500">
+                        <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span className="text-xs font-bold uppercase tracking-wider">{match.date}</span>
+                      </div>
+                      <div className="w-px h-4 bg-slate-200"></div>
+                      <div className="flex items-center gap-1.5">
+                        <svg className="w-3.5 h-3.5 text-red-sport" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span className="font-display font-bold text-2xl text-[#0A1128] tracking-tighter leading-none">{match.time}</span>
+                        <span className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">WIB</span>
+                      </div>
+                    </div>
+
+                    {/* ── VENUE ── */}
+                    <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <svg className="w-3.5 h-3.5 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span className="text-slate-700 font-bold text-xs uppercase tracking-wider truncate">{match.venue}</span>
+                        <span className="text-slate-300 shrink-0">·</span>
+                        <span className="text-slate-400 text-xs shrink-0">{match.city}</span>
+                      </div>
+                      <Link href="#" className="shrink-0 text-cyan-600 hover:text-cyan-800 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 transition-colors ml-2">
+                        LIHAT VENUE <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                      </Link>
+                    </div>
+
+                    {/* ── PLAYER PREVIEW ── */}
+                    <div className="px-5 py-4 bg-white border-b border-slate-100">
+                      <div className="flex items-start justify-between gap-4">
+                        {/* Home players */}
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">{match.home.full}</p>
+                          <div className="flex flex-wrap gap-1">
+                            {match.home.players.map((p, pi) => (
+                              <span key={pi} className="bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 leading-tight">{p}</span>
+                            ))}
+                          </div>
+                        </div>
+                        {/* Separator */}
+                        <div className="w-px self-stretch bg-slate-100 shrink-0"></div>
+                        {/* Away players */}
+                        <div className="flex-1 min-w-0 text-right">
+                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">{match.away.full}</p>
+                          <div className="flex flex-wrap justify-end gap-1">
+                            {match.away.players.map((p, pi) => (
+                              <span key={pi} className="bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 leading-tight">{p}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      {match.extraPlayers > 0 && (
+                        <button className="mt-2 text-[10px] text-cyan-600 font-bold hover:text-[#0A1128] transition-colors tracking-wider">
+                          + {match.extraPlayers} pemain lainnya
+                        </button>
+                      )}
+                    </div>
+
+                    {/* ── CTA FOOTER ── */}
+                    <div className="mt-auto">
+                      <Link
+                        href="#"
+                        className="flex items-center justify-between w-full px-5 py-3.5 bg-[#0A1128] hover:bg-red-sport text-white transition-colors group/cta"
+                      >
+                        <span className="font-bold text-xs uppercase tracking-widest">LIHAT DETAIL PERTANDINGAN</span>
+                        <svg className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
                 {[
                   {
                     sport: 'SEPAK BOLA',
