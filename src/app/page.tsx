@@ -310,6 +310,203 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ATHLETE & VISITOR GUIDE SECTION */}
+      <section className="bg-slate-50 relative overflow-hidden">
+        {/* Section Transition Header */}
+        <div className="bg-[#0A1128] text-white py-12 border-t border-slate-800">
+          <div className="container mx-auto px-4 lg:px-8 text-center">
+            <p className="text-cyan-400 font-bold tracking-[0.2em] uppercase text-sm mb-4">
+              Pertandingan Adalah Tujuan. Kenyamanan Adalah Kebutuhan.
+            </p>
+            <h2 className="font-display font-bold text-4xl md:text-6xl uppercase tracking-tight mb-4">
+              Athlete & Visitor Guide
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+              Temukan berbagai fasilitas yang dibutuhkan atlet, kontingen, official, dan penonton di sekitar venue pertandingan.
+            </p>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 py-16">
+          {/* Controls: Venue & Distance */}
+          <div className="bg-white p-6 md:p-8 shadow-xl -mt-24 relative z-20 flex flex-col md:flex-row gap-6 items-end border-t-4 border-red-sport">
+            <div className="flex-1 w-full">
+              <label className="block text-[#0A1128] font-bold text-sm uppercase tracking-wider mb-2">Cari Fasilitas di Sekitar Venue</label>
+              <div className="relative">
+                <select className="w-full bg-slate-100 border border-slate-200 text-[#0A1128] font-semibold text-lg p-4 appearance-none rounded-none focus:outline-none focus:border-cyan-400">
+                  <option>Stadion Gelora Bung Tomo</option>
+                  <option>Kolam Renang KONI Jatim</option>
+                  <option>GOR Sudirman Surabaya</option>
+                  <option>Stadion Gelora Delta Sidoarjo</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#0A1128]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+            </div>
+            <div className="w-full md:w-auto">
+              <label className="block text-slate-500 font-bold text-xs uppercase tracking-wider mb-2">Jarak dari Venue</label>
+              <div className="flex bg-slate-100 p-1">
+                <button className="px-4 py-2 bg-white shadow-sm text-[#0A1128] font-bold text-sm">&lt; 1 km</button>
+                <button className="px-4 py-2 text-slate-500 hover:text-[#0A1128] font-bold text-sm">&lt; 2 km</button>
+                <button className="px-4 py-2 text-slate-500 hover:text-[#0A1128] font-bold text-sm">&lt; 5 km</button>
+                <button className="px-4 py-2 text-slate-500 hover:text-[#0A1128] font-bold text-sm">Semua</button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 mb-6 flex items-center justify-between">
+            <p className="text-slate-600 font-medium">
+              Menampilkan fasilitas dalam radius <strong className="text-[#0A1128]">1 km</strong> dari <strong className="text-[#0A1128]">Stadion Gelora Bung Tomo</strong>
+            </p>
+          </div>
+
+          {/* Category Filters (Scrollable on Mobile) */}
+          <div className="flex overflow-x-auto gap-3 pb-4 mb-8 scrollbar-hide">
+            {[
+              { icon: '🏨', name: 'Hotel & Penginapan', count: 18, active: true },
+              { icon: '🏥', name: 'Kesehatan', count: 7 },
+              { icon: '🍜', name: 'Kuliner', count: 42 },
+              { icon: '🛒', name: 'Kebutuhan Harian', count: 25 },
+              { icon: '🏋️', name: 'Fitness & Olahraga', count: 8 },
+              { icon: '🚗', name: 'Transportasi', count: 12 },
+              { icon: '🕌', name: 'Tempat Ibadah', count: 15 },
+              { icon: '📍', name: 'Wisata', count: 9 },
+            ].map((cat, i) => (
+              <button key={i} className={`flex items-center gap-2 px-5 py-3 whitespace-nowrap border transition-colors ${cat.active ? 'bg-[#0A1128] border-[#0A1128] text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-cyan-400'}`}>
+                <span className="text-lg">{cat.icon}</span>
+                <span className="font-bold text-sm tracking-wide">{cat.name}</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${cat.active ? 'bg-cyan-500/20 text-cyan-300' : 'bg-slate-100 text-slate-500'}`}>{cat.count}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Map and Content Layout */}
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left: Map (Top on mobile) */}
+            <div className="lg:w-7/12 order-1 lg:order-2 h-[400px] lg:h-[700px] bg-slate-200 relative overflow-hidden border border-slate-200 group">
+              {/* Fake Map Image / UI */}
+              <div className="absolute inset-0 bg-[#E8EAED]" style={{ backgroundImage: 'radial-gradient(#CBD5E1 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+              
+              {/* Map UI Elements */}
+              <div className="absolute top-4 right-4 flex flex-col gap-2">
+                <button className="w-10 h-10 bg-white shadow-md flex items-center justify-center text-[#0A1128] hover:text-cyan-500"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg></button>
+                <button className="w-10 h-10 bg-white shadow-md flex items-center justify-center text-[#0A1128] hover:text-cyan-500"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M20 12H4"></path></svg></button>
+              </div>
+
+              {/* PORPROV Venue Marker */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20 cursor-pointer">
+                <div className="bg-[#0A1128] text-white px-3 py-1 font-bold text-xs uppercase tracking-widest shadow-lg whitespace-nowrap border-b-2 border-red-sport mb-1">Stadion Gelora Bung Tomo</div>
+                <div className="w-12 h-12 bg-red-sport rounded-full flex items-center justify-center shadow-[0_0_0_4px_rgba(255,255,255,1),0_10px_15px_-3px_rgba(0,0,0,0.3)] animate-bounce">
+                  <span className="text-white text-xl">🏅</span>
+                </div>
+              </div>
+
+              {/* Facility Markers */}
+              <div className="absolute top-[30%] left-[60%] flex flex-col items-center cursor-pointer group/marker z-10">
+                <div className="w-10 h-10 bg-cyan-600 rounded-full flex items-center justify-center shadow-[0_0_0_3px_rgba(255,255,255,1)] group-hover/marker:scale-110 group-hover/marker:bg-[#0A1128] transition-all">
+                  <span className="text-white text-base">🏨</span>
+                </div>
+              </div>
+              <div className="absolute top-[60%] left-[40%] flex flex-col items-center cursor-pointer group/marker z-10">
+                <div className="w-10 h-10 bg-cyan-600 rounded-full flex items-center justify-center shadow-[0_0_0_3px_rgba(255,255,255,1)] group-hover/marker:scale-110 group-hover/marker:bg-[#0A1128] transition-all">
+                  <span className="text-white text-base">🏨</span>
+                </div>
+              </div>
+              
+              {/* Active Marker Popup */}
+              <div className="absolute top-[20%] left-[55%] z-30">
+                <div className="bg-white p-4 shadow-2xl border-l-4 border-cyan-500 w-64 translate-x-4 -translate-y-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h5 className="font-bold text-[#0A1128] text-sm uppercase leading-tight">Hotel Atlet Internasional</h5>
+                    <span className="text-xs bg-slate-100 px-1 font-bold">4.7 ★</span>
+                  </div>
+                  <p className="text-xs text-slate-500 font-medium mb-3">🏨 Hotel • 850 m dari venue</p>
+                  <p className="text-xs text-slate-600 mb-4 line-clamp-2">Jl. Gelora Bung Tomo No. 1, Benowo, Surabaya</p>
+                  <div className="flex gap-2">
+                    <button className="flex-1 bg-slate-100 text-[#0A1128] text-xs font-bold py-2 hover:bg-slate-200">DETAIL</button>
+                    <button className="flex-1 bg-cyan-500 text-white text-xs font-bold py-2 hover:bg-cyan-600">NAVIGASI</button>
+                  </div>
+                </div>
+                {/* Pointer */}
+                <div className="w-4 h-4 bg-white rotate-45 absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 shadow-xl border-b border-r border-slate-200"></div>
+              </div>
+            </div>
+
+            {/* Right: List (Bottom on mobile) */}
+            <div className="lg:w-5/12 order-2 lg:order-1 flex flex-col">
+              
+              {/* Athlete Essentials Quick Block */}
+              <div className="bg-[#0A1128] p-6 mb-6">
+                <h4 className="text-white font-display font-bold tracking-widest uppercase text-sm mb-4 border-b border-slate-800 pb-2">Athlete Essentials</h4>
+                <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+                  <a href="#" className="text-cyan-400 hover:text-white text-sm font-semibold flex items-center gap-2 transition-colors"><span>🏥</span> RS & Klinik Terdekat</a>
+                  <a href="#" className="text-cyan-400 hover:text-white text-sm font-semibold flex items-center gap-2 transition-colors"><span>💊</span> Apotek Darurat</a>
+                  <a href="#" className="text-cyan-400 hover:text-white text-sm font-semibold flex items-center gap-2 transition-colors"><span>🏋️</span> Fitness Center</a>
+                  <a href="#" className="text-cyan-400 hover:text-white text-sm font-semibold flex items-center gap-2 transition-colors"><span>🧺</span> Layanan Laundry</a>
+                </div>
+              </div>
+
+              {/* Cards List */}
+              <div className="flex flex-col gap-4 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
+                {[
+                  { name: 'Hotel Atlet Internasional', category: 'Hotel', icon: '🏨', dist: '850 m', rating: '4.7', price: 'Rp500K - Rp900K', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600' },
+                  { name: 'Guest House Benowo', category: 'Guest House', icon: '🏨', dist: '1.2 km', rating: '4.2', price: 'Rp200K - Rp400K', img: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&q=80&w=600' },
+                  { name: 'Klinik Olahraga Prima', category: 'Klinik', icon: '🏥', dist: '1.5 km', rating: '4.9', emergency: true, img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=600' },
+                  { name: 'Rumah Makan Padang Saiyo', category: 'Restoran', icon: '🍜', dist: '900 m', rating: '4.5', price: 'Rp30K - Rp75K', img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600' }
+                ].map((item, i) => (
+                  <div key={i} className="flex bg-white border border-slate-200 hover:border-cyan-400 transition-colors group cursor-pointer h-36">
+                    <div className="w-32 h-full relative shrink-0">
+                      <Image src={item.img} alt={item.name} fill className="object-cover" />
+                      {item.emergency && <div className="absolute top-0 left-0 bg-red-sport text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest">24 JAM</div>}
+                    </div>
+                    <div className="p-4 flex flex-col justify-between flex-1 min-w-0">
+                      <div>
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="font-bold text-[#0A1128] truncate text-base leading-tight uppercase mr-2 group-hover:text-cyan-600 transition-colors">{item.name}</h4>
+                          <span className="text-xs font-bold bg-slate-100 px-1 shrink-0">★ {item.rating}</span>
+                        </div>
+                        <p className="text-xs text-slate-500 font-medium flex items-center gap-1">
+                          <span>{item.icon}</span> {item.category} <span className="mx-1">•</span> <span className="text-red-sport">{item.dist} dari venue</span>
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-end mt-2">
+                        {item.price ? (
+                          <span className="text-xs font-bold text-slate-700">{item.price}</span>
+                        ) : (
+                          <span></span>
+                        )}
+                        <div className="flex gap-2">
+                          <span className="text-xs font-bold text-[#0A1128] hover:text-cyan-500 uppercase tracking-wider">Detail</span>
+                          <span className="text-cyan-300">|</span>
+                          <span className="text-xs font-bold text-cyan-600 hover:text-[#0A1128] uppercase tracking-wider flex items-center gap-1">Rute <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Explore More CTA */}
+          <div className="mt-16 bg-[#0A1128] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+            <div className="absolute -right-20 -top-20 opacity-5 pointer-events-none">
+              <svg width="300" height="300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+            </div>
+            <div className="relative z-10 md:w-2/3 text-center md:text-left">
+              <h3 className="font-display font-bold text-3xl md:text-4xl text-white uppercase tracking-tight mb-2">Butuh Fasilitas Lain?</h3>
+              <p className="text-slate-400 font-medium">Temukan lebih banyak tempat yang dapat membantu kebutuhan atlet, kontingen, official, dan penonton selama PORPROV JATIM 2027.</p>
+            </div>
+            <div className="relative z-10">
+              <Link href="#" className="bg-red-sport hover:bg-red-600 text-white font-bold py-4 px-8 uppercase tracking-wider transition-all inline-block skew-x-[-10deg]">
+                <span className="inline-block skew-x-[10deg] flex items-center gap-2">JELAJAHI SEMUA FASILITAS <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HIGHLIGHT SECTION */}
       <section className="bg-red-sport border-y-8 border-[#0A1128] relative overflow-hidden">
         {/* Diagonal stripes background */}
