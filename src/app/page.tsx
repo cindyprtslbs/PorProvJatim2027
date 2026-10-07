@@ -123,70 +123,204 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* JADWAL PERTANDINGAN */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
+      {/* JADWAL PERTANDINGAN BERDASARKAN CABOR */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        {/* Section Header */}
+        <div className="container mx-auto px-4 lg:px-8 mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+            <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-1 bg-red-sport"></div>
                 <span className="text-red-sport font-bold tracking-widest uppercase text-sm">Kompetisi</span>
               </div>
               <h2 className="font-display font-bold text-5xl text-[#0A1128] uppercase tracking-tight mb-4">Jadwal Pertandingan</h2>
-              <p className="text-slate-600 max-w-2xl text-lg">Ikuti jadwal pertandingan dan dukung atlet kontingen daerah kebanggaan Anda.</p>
+              <p className="text-[#0A1128] font-bold text-xl mb-2">Temukan jadwal pertandingan PORPROV JATIM 2027 berdasarkan cabang olahraga.</p>
+              <p className="text-slate-600 text-lg">Pilih cabang olahraga untuk melihat jadwal pertandingan, venue, dan waktu pertandingan.</p>
             </div>
-            <Link href="#" className="font-bold text-[#0A1128] border-b-2 border-red-sport pb-1 hover:text-red-sport transition-colors uppercase tracking-wider text-sm">LIHAT SEMUA JADWAL</Link>
           </div>
+        </div>
 
-          {/* Filters */}
-          <div className="flex flex-wrap gap-4 mb-8">
-            <button className="bg-[#0A1128] text-white px-6 py-2 font-bold text-sm uppercase tracking-wider skew-x-[-10deg]"><span className="inline-block skew-x-[10deg]">HARI INI</span></button>
-            <button className="bg-white border border-slate-300 text-slate-600 hover:border-[#0A1128] hover:text-[#0A1128] px-6 py-2 font-bold text-sm uppercase tracking-wider skew-x-[-10deg] transition-colors"><span className="inline-block skew-x-[10deg]">BESOK</span></button>
-            <button className="bg-white border border-slate-300 text-slate-600 hover:border-[#0A1128] hover:text-[#0A1128] px-6 py-2 font-bold text-sm uppercase tracking-wider skew-x-[-10deg] transition-colors"><span className="inline-block skew-x-[10deg]">SEMUA CABOR</span></button>
-          </div>
-
-          {/* Schedule List */}
-          <div className="flex flex-col gap-4">
+        {/* CABOR SELECTOR */}
+        <div className="container mx-auto px-0 lg:px-8 mb-8">
+          <div className="flex overflow-x-auto gap-2 px-4 lg:px-0 pb-4 scrollbar-hide snap-x">
             {[
-              { date: '08 OKT', time: '15:00', sport: 'SEPAK BOLA', match: 'KOTA SURABAYA vs KAB. MALANG', venue: 'Stadion Gelora Bung Tomo', status: 'Segera Dimulai' },
-              { date: '08 OKT', time: '16:30', sport: 'BOLA BASKET', match: 'KOTA KEDIRI vs KOTA MADIUN', venue: 'DBL Arena Surabaya', status: 'Persiapan' },
-              { date: '08 OKT', time: '19:00', sport: 'BOLA VOLI', match: 'KAB. SIDOARJO vs KAB. GRESIK', venue: 'GOR Sidoarjo', status: 'Menunggu' },
-            ].map((schedule, i) => (
-              <div key={i} className="bg-white border border-slate-200 hover:border-red-sport hover:shadow-xl transition-all p-0 flex flex-col md:flex-row items-stretch group cursor-pointer relative overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-sport scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                
-                {/* Date Block */}
-                <div className="bg-slate-100 p-6 flex flex-col justify-center items-center min-w-[120px] border-r border-slate-200">
-                  <span className="font-display font-bold text-3xl text-[#0A1128] leading-none">{schedule.date.split(' ')[0]}</span>
-                  <span className="font-bold text-red-sport tracking-wider">{schedule.date.split(' ')[1]}</span>
+              { icon: '⚽', name: 'SEPAK BOLA', active: true },
+              { icon: '🏀', name: 'BOLA BASKET' },
+              { icon: '🏸', name: 'BULU TANGKIS' },
+              { icon: '🏊', name: 'RENANG' },
+              { icon: '🏃', name: 'ATLETIK' },
+              { icon: '🏐', name: 'BOLA VOLI' },
+              { icon: '🏹', name: 'PANAHAN' },
+              { icon: '🎾', name: 'TENIS' },
+            ].map((cabor, idx) => (
+              <button key={idx} className={`snap-start shrink-0 flex items-center gap-3 px-6 py-4 border-b-4 transition-colors ${cabor.active ? 'border-red-sport bg-white shadow-md' : 'border-transparent bg-slate-100/50 hover:bg-slate-200 text-slate-500'}`}>
+                <span className="text-2xl">{cabor.icon}</span>
+                <span className={`font-bold uppercase tracking-wider ${cabor.active ? 'text-[#0A1128]' : ''}`}>{cabor.name}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="bg-white shadow-2xl shadow-slate-200/50 flex flex-col overflow-hidden relative">
+            {/* SPORT FEATURE AREA */}
+            <div className="relative bg-[#0A1128] text-white overflow-hidden p-8 lg:p-12">
+              <div className="absolute inset-0 z-0 opacity-30 mix-blend-luminosity">
+                <Image src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=2000" alt="Sepak Bola" fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128] via-[#0A1128]/90 to-transparent"></div>
+              </div>
+              <div className="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-5xl drop-shadow-md">⚽</span>
+                    <h3 className="font-display font-bold text-5xl lg:text-6xl uppercase tracking-tight">SEPAK BOLA</h3>
+                  </div>
+                  <p className="text-cyan-400 font-bold uppercase tracking-widest text-sm mb-2">Jadwal Pertandingan Sepak Bola</p>
+                  <p className="text-slate-300">PORPROV JATIM IX 2027</p>
                 </div>
-                
-                {/* Content Block */}
-                <div className="p-6 flex-1 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="flex gap-8 bg-black/40 backdrop-blur-md p-6 border-l-4 border-red-sport">
                   <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="bg-[#0A1128] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest">{schedule.sport}</span>
-                      <span className="text-slate-500 font-bold text-sm flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        {schedule.time} WIB
-                      </span>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Total Pertandingan</p>
+                    <p className="font-display font-bold text-4xl leading-none text-white">24</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Venue</p>
+                    <p className="font-display font-bold text-4xl leading-none text-white">6</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* DATE FILTER & SECONDARY FILTERS */}
+            <div className="border-b border-slate-200 bg-white p-4 lg:px-8 flex flex-col xl:flex-row justify-between items-center gap-4">
+              {/* Date Navigation */}
+              <div className="flex items-center gap-1 w-full xl:w-auto overflow-x-auto pb-2 xl:pb-0 scrollbar-hide">
+                <button className="text-slate-400 hover:text-red-sport p-2 shrink-0 transition-colors"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                {[
+                  { date: '08 OKT', active: true },
+                  { date: '09 OKT' },
+                  { date: '10 OKT' },
+                  { date: '11 OKT' },
+                  { date: '12 OKT' },
+                ].map((d, i) => (
+                  <button key={i} className={`shrink-0 px-5 py-2 font-bold text-sm tracking-wider uppercase transition-colors ${d.active ? 'bg-[#0A1128] text-white skew-x-[-10deg]' : 'text-slate-500 hover:bg-slate-100 hover:text-[#0A1128]'}`}>
+                    <span className={d.active ? 'inline-block skew-x-[10deg]' : ''}>{d.date}</span>
+                  </button>
+                ))}
+                <button className="text-slate-400 hover:text-red-sport p-2 shrink-0 transition-colors"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg></button>
+              </div>
+
+              {/* Secondary Filters */}
+              <div className="flex items-center gap-3 w-full xl:w-auto overflow-x-auto pb-2 xl:pb-0 scrollbar-hide">
+                <select className="bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold uppercase px-4 py-2.5 shrink-0 focus:outline-none focus:border-cyan-400 transition-colors">
+                  <option>Semua Kategori</option>
+                  <option>Putra</option>
+                  <option>Putri</option>
+                </select>
+                <select className="bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold uppercase px-4 py-2.5 shrink-0 focus:outline-none focus:border-cyan-400 transition-colors">
+                  <option>Semua Venue</option>
+                  <option>Stadion Gelora Bung Tomo</option>
+                  <option>Stadion Gelora Delta</option>
+                </select>
+                <select className="bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold uppercase px-4 py-2.5 shrink-0 focus:outline-none focus:border-cyan-400 transition-colors">
+                  <option>Semua Status</option>
+                  <option>Upcoming</option>
+                  <option>Live</option>
+                  <option>Finished</option>
+                </select>
+              </div>
+            </div>
+
+            {/* SCHEDULE LAYOUT */}
+            <div className="p-4 lg:p-8 bg-white flex flex-col gap-4">
+              {/* Match Date Header */}
+              <div className="mb-4 border-l-4 border-cyan-400 pl-4">
+                <h4 className="font-display font-bold text-3xl text-[#0A1128] uppercase tracking-tight">08 Oktober 2027</h4>
+                <p className="text-slate-500 font-medium text-sm">Menampilkan jadwal ⚽ Sepak Bola</p>
+              </div>
+
+              {/* Match Items */}
+              <div className="flex flex-col gap-4">
+                {/* Team Match Example */}
+                <div className="flex flex-col md:flex-row border border-slate-200 hover:border-red-sport transition-all group relative">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-sport scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
+                  
+                  {/* Time & Status Block */}
+                  <div className="md:w-56 bg-slate-50 p-6 flex flex-row md:flex-col justify-between md:justify-center items-center border-b md:border-b-0 md:border-r border-slate-200 gap-2">
+                    <div className="text-center">
+                      <span className="font-display font-bold text-3xl text-[#0A1128] leading-none block">15:00</span>
+                      <span className="text-slate-500 font-bold text-xs uppercase tracking-widest">WIB</span>
                     </div>
-                    <h4 className="font-display font-bold text-2xl text-[#0A1128] uppercase tracking-tight mb-1">{schedule.match}</h4>
-                    <p className="text-slate-500 flex items-center gap-1 text-sm font-medium">
-                      <svg className="w-4 h-4 text-red-sport" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                      {schedule.venue}
-                    </p>
+                    <span className="mt-0 md:mt-3 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-sport text-white flex items-center gap-1.5 shadow-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> LIVE
+                    </span>
                   </div>
                   
-                  <div className="flex items-center gap-4">
-                    <span className="text-cyan-600 font-bold text-sm uppercase tracking-wider bg-cyan-50 px-3 py-1 border border-cyan-100">{schedule.status}</span>
-                    <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-red-sport group-hover:border-red-sport group-hover:text-white transition-colors">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                  {/* Details Block */}
+                  <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                    <span className="text-cyan-600 text-[10px] font-bold uppercase tracking-wider mb-3 bg-cyan-50 inline-block px-2 py-1 self-start border border-cyan-100">Penyisihan Grup A - Putra</span>
+                    <div className="flex flex-col gap-1 mb-6">
+                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA SURABAYA</div>
+                      <div className="text-slate-400 font-bold text-sm italic ml-1">vs</div>
+                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KABUPATEN MALANG</div>
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-auto border-t border-slate-100 pt-4">
+                      <div className="flex items-center gap-2 text-slate-600 text-sm font-medium">
+                        <svg className="w-4 h-4 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Stadion Gelora Bung Tomo
+                      </div>
+                      <Link href="#" className="flex items-center gap-2 text-white bg-[#0A1128] hover:bg-cyan-500 px-4 py-2 font-bold text-xs uppercase tracking-widest transition-colors skew-x-[-10deg]">
+                        <span className="inline-block skew-x-[10deg] flex items-center gap-2">LIHAT DETAIL <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Team Match Example 2 */}
+                <div className="flex flex-col md:flex-row border border-slate-200 hover:border-[#0A1128] transition-all group relative opacity-75 hover:opacity-100">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#0A1128] scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
+                  
+                  {/* Time & Status Block */}
+                  <div className="md:w-56 bg-slate-50 p-6 flex flex-row md:flex-col justify-between md:justify-center items-center border-b md:border-b-0 md:border-r border-slate-200 gap-2">
+                    <div className="text-center">
+                      <span className="font-display font-bold text-3xl text-[#0A1128] leading-none block">19:00</span>
+                      <span className="text-slate-500 font-bold text-xs uppercase tracking-widest">WIB</span>
+                    </div>
+                    <span className="mt-0 md:mt-3 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-cyan-100 text-cyan-800 border border-cyan-200">
+                      UPCOMING
+                    </span>
+                  </div>
+                  
+                  {/* Details Block */}
+                  <div className="flex-1 p-6 flex flex-col justify-center bg-white">
+                    <span className="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-3 bg-slate-100 inline-block px-2 py-1 self-start border border-slate-200">Penyisihan Grup B - Putra</span>
+                    <div className="flex flex-col gap-1 mb-6">
+                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA KEDIRI</div>
+                      <div className="text-slate-400 font-bold text-sm italic ml-1">vs</div>
+                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA BATU</div>
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-auto border-t border-slate-100 pt-4">
+                      <div className="flex items-center gap-2 text-slate-600 text-sm font-medium">
+                        <svg className="w-4 h-4 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Stadion Gelora Delta
+                      </div>
+                      <Link href="#" className="flex items-center gap-2 text-[#0A1128] hover:text-cyan-600 font-bold text-xs uppercase tracking-widest transition-colors skew-x-[-10deg]">
+                        <span className="inline-block skew-x-[10deg] flex items-center gap-2">LIHAT DETAIL <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* View All CTA */}
+            <div className="bg-slate-50 border-t border-slate-200 p-10 text-center flex flex-col items-center justify-center">
+              <h4 className="font-display font-bold text-3xl md:text-4xl text-[#0A1128] uppercase tracking-tight mb-3">LIHAT SELENGKAPNYA</h4>
+              <p className="text-slate-600 mb-8 max-w-lg">Jelajahi seluruh jadwal pertandingan PORPROV JATIM 2027 dari semua cabang olahraga.</p>
+              <Link href="#" className="bg-[#0A1128] text-white hover:bg-cyan-500 font-bold py-4 px-10 uppercase tracking-wider transition-colors skew-x-[-10deg] shadow-lg">
+                <span className="inline-block skew-x-[10deg] flex items-center gap-2">LIHAT SEMUA JADWAL <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
