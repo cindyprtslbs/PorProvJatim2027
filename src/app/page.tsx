@@ -232,86 +232,186 @@ export default function HomePage() {
             </div>
 
             {/* SCHEDULE LAYOUT */}
-            <div className="p-4 lg:p-8 bg-white flex flex-col gap-4">
+            <div className="p-4 lg:p-8 bg-white">
               {/* Match Date Header */}
-              <div className="mb-4 border-l-4 border-cyan-400 pl-4">
-                <h4 className="font-display font-bold text-3xl text-[#0A1128] uppercase tracking-tight">08 Oktober 2027</h4>
-                <p className="text-slate-500 font-medium text-sm">Menampilkan jadwal ⚽ Sepak Bola</p>
+              <div className="mb-8 flex items-center gap-4">
+                <div className="border-l-4 border-cyan-400 pl-4">
+                  <h4 className="font-display font-bold text-3xl text-[#0A1128] uppercase tracking-tight leading-none">08 Oktober 2027</h4>
+                  <p className="text-slate-500 font-medium text-sm mt-1">⚽ Sepak Bola · 4 Pertandingan</p>
+                </div>
               </div>
 
-              {/* Match Items */}
-              <div className="flex flex-col gap-4">
-                {/* Team Match Example */}
-                <div className="flex flex-col md:flex-row border border-slate-200 hover:border-red-sport transition-all group relative">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-sport scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                  
-                  {/* Time & Status Block */}
-                  <div className="md:w-56 bg-slate-50 p-6 flex flex-row md:flex-col justify-between md:justify-center items-center border-b md:border-b-0 md:border-r border-slate-200 gap-2">
-                    <div className="text-center">
-                      <span className="font-display font-bold text-3xl text-[#0A1128] leading-none block">15:00</span>
-                      <span className="text-slate-500 font-bold text-xs uppercase tracking-widest">WIB</span>
-                    </div>
-                    <span className="mt-0 md:mt-3 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-red-sport text-white flex items-center gap-1.5 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> LIVE
-                    </span>
-                  </div>
-                  
-                  {/* Details Block */}
-                  <div className="flex-1 p-6 flex flex-col justify-center bg-white">
-                    <span className="text-cyan-600 text-[10px] font-bold uppercase tracking-wider mb-3 bg-cyan-50 inline-block px-2 py-1 self-start border border-cyan-100">Penyisihan Grup A - Putra</span>
-                    <div className="flex flex-col gap-1 mb-6">
-                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA SURABAYA</div>
-                      <div className="text-slate-400 font-bold text-sm italic ml-1">vs</div>
-                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KABUPATEN MALANG</div>
-                    </div>
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-auto border-t border-slate-100 pt-4">
-                      <div className="flex items-center gap-2 text-slate-600 text-sm font-medium">
-                        <svg className="w-4 h-4 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Stadion Gelora Bung Tomo
-                      </div>
-                      <Link href="#" className="flex items-center gap-2 text-white bg-[#0A1128] hover:bg-cyan-500 px-4 py-2 font-bold text-xs uppercase tracking-widest transition-colors skew-x-[-10deg]">
-                        <span className="inline-block skew-x-[10deg] flex items-center gap-2">LIHAT DETAIL <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+              {/* Match Cards — 2-Column Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {[
+                  {
+                    sport: 'SEPAK BOLA',
+                    date: '08 OKT 2027',
+                    time: '15:00',
+                    round: 'Penyisihan Grup A · Putra',
+                    status: 'live',
+                    homeShort: 'SBY',
+                    homeFull: 'SURABAYA',
+                    homeAdmin: 'Kota Surabaya',
+                    homeColor: '#0A1128',
+                    awayShort: 'MLG',
+                    awayFull: 'MALANG',
+                    awayAdmin: 'Kab. Malang',
+                    awayColor: '#7B0000',
+                    venue: 'Stadion Gelora Bung Tomo',
+                    city: 'Surabaya',
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    date: '08 OKT 2027',
+                    time: '19:00',
+                    round: 'Penyisihan Grup B · Putra',
+                    status: 'upcoming',
+                    homeShort: 'KDR',
+                    homeFull: 'KEDIRI',
+                    homeAdmin: 'Kota Kediri',
+                    homeColor: '#1A3A5C',
+                    awayShort: 'BTU',
+                    awayFull: 'BATU',
+                    awayAdmin: 'Kota Batu',
+                    awayColor: '#2D5A1B',
+                    venue: 'Stadion Gelora Delta',
+                    city: 'Sidoarjo',
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    date: '08 OKT 2027',
+                    time: '10:00',
+                    round: 'Penyisihan Grup A · Putri',
+                    status: 'finished',
+                    homeShort: 'GRS',
+                    homeFull: 'GRESIK',
+                    homeAdmin: 'Kab. Gresik',
+                    homeColor: '#4A1F00',
+                    awayShort: 'SDR',
+                    awayFull: 'SIDOARJO',
+                    awayAdmin: 'Kab. Sidoarjo',
+                    awayColor: '#003366',
+                    venue: 'Stadion Gelora Bung Tomo',
+                    city: 'Surabaya',
+                  },
+                  {
+                    sport: 'SEPAK BOLA',
+                    date: '08 OKT 2027',
+                    time: '13:00',
+                    round: 'Penyisihan Grup C · Putra',
+                    status: 'upcoming',
+                    homeShort: 'MDN',
+                    homeFull: 'MADIUN',
+                    homeAdmin: 'Kota Madiun',
+                    homeColor: '#5C1A1A',
+                    awayShort: 'MJK',
+                    awayFull: 'MOJOKERTO',
+                    awayAdmin: 'Kota Mojokerto',
+                    awayColor: '#1A4A2E',
+                    venue: 'Stadion Brantas',
+                    city: 'Kediri',
+                  },
+                ].map((match, i) => (
+                  <div
+                    key={i}
+                    className="group bg-white border border-slate-200 hover:border-[#0A1128] hover:-translate-y-1 hover:shadow-2xl transition-all duration-200 flex flex-col relative overflow-hidden"
+                  >
+                    {/* Top accent line — colored by status */}
+                    <div className={`h-1 w-full ${match.status === 'live' ? 'bg-red-sport' : match.status === 'finished' ? 'bg-slate-300' : 'bg-cyan-400'}`}></div>
 
-                {/* Team Match Example 2 */}
-                <div className="flex flex-col md:flex-row border border-slate-200 hover:border-[#0A1128] transition-all group relative opacity-75 hover:opacity-100">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#0A1128] scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
-                  
-                  {/* Time & Status Block */}
-                  <div className="md:w-56 bg-slate-50 p-6 flex flex-row md:flex-col justify-between md:justify-center items-center border-b md:border-b-0 md:border-r border-slate-200 gap-2">
-                    <div className="text-center">
-                      <span className="font-display font-bold text-3xl text-[#0A1128] leading-none block">19:00</span>
-                      <span className="text-slate-500 font-bold text-xs uppercase tracking-widest">WIB</span>
-                    </div>
-                    <span className="mt-0 md:mt-3 px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-cyan-100 text-cyan-800 border border-cyan-200">
-                      UPCOMING
-                    </span>
-                  </div>
-                  
-                  {/* Details Block */}
-                  <div className="flex-1 p-6 flex flex-col justify-center bg-white">
-                    <span className="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-3 bg-slate-100 inline-block px-2 py-1 self-start border border-slate-200">Penyisihan Grup B - Putra</span>
-                    <div className="flex flex-col gap-1 mb-6">
-                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA KEDIRI</div>
-                      <div className="text-slate-400 font-bold text-sm italic ml-1">vs</div>
-                      <div className="font-display font-bold text-2xl md:text-3xl text-[#0A1128] uppercase tracking-tight">KOTA BATU</div>
-                    </div>
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-auto border-t border-slate-100 pt-4">
-                      <div className="flex items-center gap-2 text-slate-600 text-sm font-medium">
-                        <svg className="w-4 h-4 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Stadion Gelora Delta
+                    {/* Card Header */}
+                    <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <span className="bg-[#0A1128] text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest">{match.sport}</span>
+                        <span className="text-slate-400 text-xs font-semibold">{match.round}</span>
                       </div>
-                      <Link href="#" className="flex items-center gap-2 text-[#0A1128] hover:text-cyan-600 font-bold text-xs uppercase tracking-widest transition-colors skew-x-[-10deg]">
-                        <span className="inline-block skew-x-[10deg] flex items-center gap-2">LIHAT DETAIL <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></span>
+                      {/* Status Badge */}
+                      {match.status === 'live' && (
+                        <span className="flex items-center gap-1.5 bg-red-sport text-white text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                          LIVE NOW
+                        </span>
+                      )}
+                      {match.status === 'upcoming' && (
+                        <span className="text-cyan-700 text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest bg-cyan-50 border border-cyan-200">
+                          UPCOMING
+                        </span>
+                      )}
+                      {match.status === 'finished' && (
+                        <span className="text-slate-400 text-[9px] font-bold px-2.5 py-1 uppercase tracking-widest bg-slate-100 border border-slate-200">
+                          SELESAI
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Match Time */}
+                    <div className="text-center pt-4 pb-2">
+                      <span className="font-display font-bold text-4xl text-[#0A1128] tracking-tighter leading-none">{match.time}</span>
+                      <span className="text-slate-400 font-bold text-xs uppercase tracking-widest ml-1">WIB</span>
+                      <p className="text-slate-400 text-xs font-medium mt-0.5">{match.date}</p>
+                    </div>
+
+                    {/* VS Block — Main Focus */}
+                    <div className="flex items-center justify-between px-4 py-6 gap-3">
+                      {/* Home Team */}
+                      <div className="flex-1 flex flex-col items-center gap-3">
+                        {/* Logo Placeholder — Replace with actual emblem */}
+                        <div
+                          className="w-16 h-16 flex items-center justify-center border-2 border-slate-100 group-hover:scale-105 transition-transform duration-200 shrink-0"
+                          style={{ backgroundColor: match.homeColor }}
+                        >
+                          <span className="font-display font-black text-white text-lg tracking-tighter">{match.homeShort}</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-display font-bold text-xl text-[#0A1128] uppercase tracking-tight leading-none">{match.homeFull}</div>
+                          <div className="text-slate-400 text-[10px] font-semibold mt-0.5">{match.homeAdmin}</div>
+                        </div>
+                      </div>
+
+                      {/* VS Divider */}
+                      <div className="shrink-0 flex flex-col items-center gap-1">
+                        <div className="w-px h-8 bg-slate-200"></div>
+                        <span className="font-display font-bold text-slate-300 text-base tracking-widest">VS</span>
+                        <div className="w-px h-8 bg-slate-200"></div>
+                      </div>
+
+                      {/* Away Team */}
+                      <div className="flex-1 flex flex-col items-center gap-3">
+                        <div
+                          className="w-16 h-16 flex items-center justify-center border-2 border-slate-100 group-hover:scale-105 transition-transform duration-200 shrink-0"
+                          style={{ backgroundColor: match.awayColor }}
+                        >
+                          <span className="font-display font-black text-white text-lg tracking-tighter">{match.awayShort}</span>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-display font-bold text-xl text-[#0A1128] uppercase tracking-tight leading-none">{match.awayFull}</div>
+                          <div className="text-slate-400 text-[10px] font-semibold mt-0.5">{match.awayAdmin}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer — Venue & CTA */}
+                    <div className="mt-auto border-t border-slate-100 px-5 py-3 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium min-w-0">
+                        <svg className="w-3.5 h-3.5 text-red-sport shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span className="truncate">{match.venue}</span>
+                        <span className="text-slate-300 shrink-0">·</span>
+                        <span className="text-slate-400 shrink-0">{match.city}</span>
+                      </div>
+                      <Link
+                        href="#"
+                        className="shrink-0 text-[10px] font-bold text-[#0A1128] uppercase tracking-widest flex items-center gap-1 group-hover:text-red-sport transition-colors ml-2"
+                      >
+                        DETAIL
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                       </Link>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
+
 
             {/* View All CTA */}
             <div className="bg-slate-50 border-t border-slate-200 p-10 text-center flex flex-col items-center justify-center">
